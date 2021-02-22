@@ -1,2 +1,2 @@
 # Game-Snake
-The famous snake game in Javascript
+The famous snake game in Javascript.
