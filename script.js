@@ -85,7 +85,8 @@ constructor(Px=0,Py=0,dimention){
  */
 isSamePosition(OtherPosition){
 
-    if(!OtherPosition.isPosition()) throw "May be the argument is not a Position";
+    if(!OtherPosition.isPosition())
+        throw "May be the argument is not a Position";
 
     if( OtherPosition.isPosition() )
         return (OtherPosition.Px==this.Px)&&(OtherPosition.Py==this.Py);
