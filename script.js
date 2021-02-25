@@ -12,7 +12,6 @@ const NUMBER_DIVISION = Math.floor(SCREEN_SIZE/SIZE_DIVISION);
 image.src = "./imagem.png";
 
 
-//Define the height
 canvas.height = SCREEN_SIZE;
 
 window.onload = function (){
@@ -28,7 +27,7 @@ function main(){
 
 let screen = new Screen(NUMBER_DIVISION,SCREEN_SIZE,SCREEN_SIZE);
 let snake = new Snake(NUMBER_DIVISION,SIZE_DIVISION);
-let food = new Food(2,2,SIZE_DIVISION); //(x,y,dimention)
+let food = new Food(2,2,SIZE_DIVISION);
 let score = 0;
 let needPaintFood = true;
 let gapToCreateFood = 1000;
@@ -168,7 +167,7 @@ move(){
 
     this.snakeTrail.pop();
     this.snakeTrail.unshift(new Position(px,py,this.dimention));
-    this.changeDirection = false; //to allow setMoveDirection
+    this.changeDirection = false;
 }
 
 setMoveDirection(keyCode){
@@ -220,9 +219,7 @@ eat(food){
 
     let [headPosition,...bodyPositions] = this.snakeTrail;
 
-    // eat food
     if (headPosition.isSamePosition(food)) return 1;
-    // eat itself
     else if (bodyPositions.some( position => position.isSamePosition(headPosition) )) return -1;
     
     return 0;
