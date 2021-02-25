@@ -1,6 +1,9 @@
 # Game-Snake
 <p align="center">
 The famous snake game written in Javascript</p>
+
+<img src="./snake_image.png" alt="print_screen" width="500px" height="300px">
+
 <hr>
 
 
