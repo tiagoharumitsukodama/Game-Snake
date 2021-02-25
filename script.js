@@ -16,7 +16,7 @@ canvas.height = SCREEN_SIZE;
 
 window.onload = function (){
     context.fillStyle = "back";
-    context.fillRect(0,0,SCREEN_SIZE,SCREEN_SIZE);
+    context.fillRect(0, 0, SCREEN_SIZE, SCREEN_SIZE);
     context.drawImage(image, 50, 50);
 
     setTimeout(main, 2000)
@@ -25,50 +25,50 @@ window.onload = function (){
 
 function main(){
 
-let screen = new Screen(NUMBER_DIVISION,SCREEN_SIZE,SCREEN_SIZE);
-let snake = new Snake(NUMBER_DIVISION,SIZE_DIVISION);
-let food = new Food(2,2,SIZE_DIVISION);
-let score = 0;
-let needPaintFood = true;
-let gapToCreateFood = 1000;
-let gapToRefresh = 60000/SCREEN_SIZE;
+    let screen = new Screen(NUMBER_DIVISION,SCREEN_SIZE,SCREEN_SIZE);
+    let snake = new Snake(NUMBER_DIVISION,SIZE_DIVISION);
+    let food = new Food(2, 2, SIZE_DIVISION);
+    let score = 0;
+    let needPaintFood = true;
+    let gapToCreateFood = 1000;
+    let gapToRefresh = 60000/SCREEN_SIZE;
 
 
-window.addEventListener("keydown", (event) => {
-    snake.setMoveDirection(event.keyCode)} );
+    window.addEventListener("keydown", (event) => {
+        snake.setMoveDirection(event.keyCode)} );
 
-//loop
-let Interval = setInterval(play,parseInt(gapToRefresh));
+    //loop
+    let Interval = setInterval(play,parseInt(gapToRefresh));
 
-//main function
-function play(){
+    //main function
+    function play(){
 
-    snake.move();
+        snake.move();
 
-        //can return -1, 0 or 1
-    let status = snake.eat(food);
+            //can return -1, 0 or 1
+        let status = snake.eat(food);
 
-    if(status==-1){
-        clearInterval(Interval);
-        msgHTML.innerHTML = "GAME OVER"
+        if( status == -1 ){
+            clearInterval(Interval);
+            msgHTML.innerHTML = "GAME OVER"
+        }
+        if( status == 1 ){
+            needPaintFood = false;
+            score++
+            scoreHTML.innerHTML = score.toString();
+
+            setTimeout(() => {
+                food = screen.createNewFood(snake);
+                snake.growUp();
+                needPaintFood = true;},
+                gapToCreateFood
+            );
+        }
+
+        screen.paintBackground(context);
+        screen.paintFood(context, food, needPaintFood);
+        screen.paintSnake(context, snake);
     }
-    if(status==1){
-        needPaintFood = false;
-        score++
-        scoreHTML.innerHTML = score.toString();
-
-        setTimeout(()=> {
-            food = screen.createNewFood(snake);
-            snake.growUp();
-            needPaintFood = true;},
-            gapToCreateFood
-        );
-    }
-
-    screen.paintBackground(context);
-    screen.paintFood(context,food,needPaintFood);
-    screen.paintSnake(context,snake);
-}
 }
 
 
@@ -81,7 +81,7 @@ class Position{
          * @param {Number} Py
          * @param {Number} dimention
          */
-        constructor(Px=0,Py=0,dimention){
+        constructor(Px=0, Py=0, dimention){
             if( typeof Px!='number' || typeof Py!='number' )
                 throw "The typeof some arguments isn't a Number";
 
@@ -100,7 +100,7 @@ class Position{
                 throw "May be the argument is not a Position";
 
             if( OtherPosition.isPosition() )
-                return (OtherPosition.Px==this.Px)&&(OtherPosition.Py==this.Py);
+                return (OtherPosition.Px == this.Px) && (OtherPosition.Py == this.Py);
         }
 
         /**
@@ -121,8 +121,8 @@ class Food extends Position{
          * @param {Number} Py
          * @param {Number} dimention
          */
-        constructor(Px=0,Py=0,dimention){
-            super(Px,Py,dimention);
+        constructor(Px=0, Py=0, dimention){
+            super(Px, Py, dimention);
         }
 }
 
@@ -141,14 +141,14 @@ class Snake{
                 throw "The typeof argument ins't a Number or the sizeSquare is smaller than necessary";
             
                 let distanceToStart = parseInt(sizeSquare/2); 
-                let p1 = new Position(distanceToStart   ,distanceToStart,dimention);
-                let p2 = new Position(distanceToStart -1,distanceToStart,dimention);
-                let p3 = new Position(distanceToStart -2,distanceToStart,dimention);
+                let p1 = new Position(distanceToStart   , distanceToStart, dimention);
+                let p2 = new Position(distanceToStart -1, distanceToStart, dimention);
+                let p3 = new Position(distanceToStart -2, distanceToStart, dimention);
 
-                this.snakeTrail = [p1,p2,p3];
-                this.Velocity=1;
-                this.Vx=1;
-                this.Vy=0;
+                this.snakeTrail = [p1, p2, p3];
+                this.Velocity = 1;
+                this.Vx = 1;
+                this.Vy = 0;
                 this.dimention = dimention;
                 this.changeDirection = false;
         }
@@ -166,7 +166,7 @@ class Snake{
             px += this.Vx;
 
             this.snakeTrail.pop();
-            this.snakeTrail.unshift(new Position(px,py,this.dimention));
+            this.snakeTrail.unshift(new Position(px, py, this.dimention));
             this.changeDirection = false;
         }
 
@@ -239,7 +239,7 @@ class Snake{
         isSnake(){
             return true;
         } 
-        }
+}
 
 
 
@@ -268,7 +268,7 @@ class Screen{
                 throw "Incorrect argument";
 
             context.fillStyle = "black";
-            context.fillRect(0,0,this.screenWidth,this.screenHeight);
+            context.fillRect(0, 0, this.screenWidth, this.screenHeight);
         }
 
         /**
@@ -276,12 +276,12 @@ class Screen{
          * @param {Context} context 
          * @param {Snake} snake 
          */
-        paintSnake(context,snake){
+        paintSnake(context,snake) {
 
-            if (!snake.isSnake()) throw "Incorrect argument.";
+            if (!snake.isSnake())
+                throw "Incorrect argument.";
 
-            let px;
-            let py;
+            let px, py;
 
             snake.snakeTrail.forEach( (position,indexOfTrail) => {
                 
@@ -302,7 +302,8 @@ class Screen{
          * @param {Food} food 
          * @param {boolean} need
          */
-        paintFood(context,food,need){
+        paintFood(context,food,need) {
+
             if(!food.isPosition())
                 throw "Incorrect argument";
 
@@ -323,13 +324,14 @@ class Screen{
          * Create new food position.
          * @param {Snake} snake 
          */
-        createNewFood(snake){
+        createNewFood(snake) {
 
-            if(!snake.isSnake()) throw "Incorrect argument";
+            if(!snake.isSnake())
+                throw "Incorrect argument";
 
             let Newpx = parseInt(this.numberDivision*Math.random());
             let Newpy = parseInt(this.numberDivision*Math.random());
-            let Newposition = new Food(Newpx,Newpy,this.sizeDivision);
+            let Newposition = new Food(Newpx, Newpy, this.sizeDivision);
 
             let overLap = snake.snakeTrail.some( position => 
                 position.isSamePosition(Newposition));
@@ -353,15 +355,15 @@ class Screen{
          * @param {Position} position 
          * @param {Number} indexOfTrail 
          */
-        gameWall(snakeTrail,position,indexOfTrail){          
+        gameWall(snakeTrail, position, indexOfTrail) {          
 
-            if(position.Px>=this.numberDivision) 
-                snakeTrail[indexOfTrail].Px=0;
-            if(position.Py>=this.numberDivision)
-                snakeTrail[indexOfTrail].Py=0;
-            if(position.Px<0)
-                snakeTrail[indexOfTrail].Px=this.numberDivision;
-            if(position.Py<0)
-                snakeTrail[indexOfTrail].Py=this.numberDivision;
+            if(position.Px >= this.numberDivision) 
+                snakeTrail[indexOfTrail].Px = 0;
+            if(position.Py >= this.numberDivision)
+                snakeTrail[indexOfTrail].Py = 0;
+            if(position.Px < 0)
+                snakeTrail[indexOfTrail].Px = this.numberDivision;
+            if(position.Py < 0)
+                snakeTrail[indexOfTrail].Py = this.numberDivision;
         }
-        }
+}
