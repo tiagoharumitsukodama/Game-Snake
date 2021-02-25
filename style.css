@@ -18,12 +18,7 @@ section {
     min-width: 500px;
     min-height: 100vh;
 }
-h1 {
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-size: 4vh;
-    font-weight: 700;
-    color: white;
-}
+
 p {
     font-size: 1.5em;
     font-weight: 700;
@@ -34,6 +29,7 @@ p {
 
 canvas {
     width: 500px;
+    box-shadow: 2px 2px 2px 2px black;
 
     border: 8px solid white;
     border-radius: 3%;
