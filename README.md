@@ -3,10 +3,6 @@
 The famous snake game written in Javascript</p>
 <hr>
 
-<h4 align="center">
-    Release
-</h4>
-
 
 ### Installation
 
