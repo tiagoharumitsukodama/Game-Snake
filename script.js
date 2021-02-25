@@ -4,15 +4,27 @@ let canvas = document.getElementById("id_canvas");
 let context = canvas.getContext("2d");
 let scoreHTML = document.getElementById("id_score");
 let msgHTML = document.getElementById("id_message");
+let image = new Image();
 
 const SCREEN_SIZE = canvas.width;
 const SIZE_DIVISION = 15;
 const NUMBER_DIVISION = Math.floor(SCREEN_SIZE/SIZE_DIVISION);
+image.src = "./imagem.png";
+
 
 //Define the height
 canvas.height = SCREEN_SIZE;
 
 window.onload = function (){
+    context.fillStyle = "back";
+    context.fillRect(0,0,SCREEN_SIZE,SCREEN_SIZE);
+    context.drawImage(image, 50, 50);
+
+    setTimeout(main, 2000)
+}
+
+
+function main(){
 
 let screen = new Screen(NUMBER_DIVISION,SCREEN_SIZE,SCREEN_SIZE);
 let snake = new Snake(NUMBER_DIVISION,SIZE_DIVISION);
